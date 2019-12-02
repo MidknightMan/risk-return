@@ -1,68 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Welcome to risk//return
 
-## Available Scripts
+**_DISCLAIMER_**
+Please use this at your own risk. No investment decisions should be made solely on the basis of this information. This has been developed as an educational software project, NOT as a financial tool.
 
-In the project directory, you can run:
+This app has been designed to allow a user to understand the risks and rewards of securities when combined in a portfolio.
+It draws from multiple different data sources and combines them to create a risk//reward risk score which can be utilised in conjunction with the 1 year return figure to determine whether or not the security looks like a reasonable investment.
 
-### `npm start`
+# Sources:
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- finnhubAPI: sentiment analysis
+- alphaVantageAPI: bollinger bands for standard deviation analysis
+- iexAPI: company profiles, logos and key stats (including beta)
+- tiingoAPI: search securities by string
+- worldtradingdataAPI: search securities by ticker symbol
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+# Installation instructions
 
-### `npm test`
+In order to run this project, please ensure that you have Node.js installed. Please follow this useful guide if you are having issues with this: https://www.guru99.com/download-install-node-js.html
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Once Node.js is installed, please clone and download this project to your chosen directory. Once you are inside the directory, use your CLI to install the dependencies required to run this project by running the command `npm install`. This may take a short amount of time, so feel free to pour yourself a brew.
 
-### `npm run build`
+To launch this project on your localhost, please run the command `npm start`. The default port is 3000.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+**_Please note that you will require API keys for all the sources above however all are available for free._**

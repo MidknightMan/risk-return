@@ -83,17 +83,17 @@ class Portfolio extends PureComponent {
               );
             })}
             <div>
-              <input
+              {/* <input
                 type="number"
                 onChange={this.changeVal}
                 value={this.state.portfolioNotional}
                 placeholder="Enter Value Here, Default 1000000"
-              />
+              /> */}
               <h3>Portfolio Metrics</h3>
               <h4>Average Risk Score: {this.getAverageRisk()}</h4>
               <h4>
-                Backtested Return From Holding Portfolio:{' '}
-                {this.getAverageReturn()}
+                Backtested Return From Holding Portfolio Based on a 1 million
+                Initial Investment: {this.getAverageReturn()}
               </h4>
             </div>
           </div>

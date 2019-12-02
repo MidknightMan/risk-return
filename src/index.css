@@ -70,22 +70,23 @@ nav a {
   font-size: 120%;
   border-radius: 15px;
   border: 1px white solid;
-  grid-column: 1 / span 1;
-  grid-row: 1 / span 1;
+  width: max-content;
+  /* grid-column: 1 / span 1;
+  grid-row: 1 / span 1; */
 }
 
-#clickOnSec {
+/* #clickOnSec {
   grid-column: 2 / span 1;
   grid-row: 1 / span 4;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
-}
+} */
 
 #resultCardContainer {
   display: grid;
-  grid-template-columns: 3fr 1fr;
-  grid-template-rows: auto auto auto auto;
+  grid-template-columns: 3fr;
+  grid-template-rows: auto auto auto auto auto;
   border: 1px white solid;
   padding: 2%;
   margin: 2%;

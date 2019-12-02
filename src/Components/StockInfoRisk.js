@@ -16,7 +16,8 @@ class StockInfoRisk extends PureComponent {
     stddev: null,
     profile: {},
     year1return: null,
-    currentPortfolio: []
+    currentPortfolio: [],
+    errorHandler: null
   };
 
   componentDidMount() {
@@ -27,22 +28,45 @@ class StockInfoRisk extends PureComponent {
       finnhub.getEarningsScore(this.props.symbol),
       iex.getKeyStats(this.props.symbol),
       av.getDeviation(this.props.symbol)
-    ]).then(([url, profileObj, sentimentObj, score, stats, stddev]) => {
-      this.setState({
-        symbol: this.props.symbol,
-        logo: url,
-        profile: profileObj,
-        sentiment: sentimentObj,
-        earningsRisk: score,
-        keyStats: stats,
-        beta: stats.beta,
-        year1return: stats.year1ChangePercent,
-        stddev,
-        isLoading: false,
-        currentPortfolio: JSON.parse(localStorage.getItem('portfolio'))
+    ])
+      .then(([url, profileObj, sentimentObj, score, stats, stddev]) => {
+        this.setState({
+          symbol: this.props.symbol,
+          logo: url,
+          profile: profileObj,
+          sentiment: sentimentObj,
+          earningsRisk: score,
+          keyStats: stats,
+          beta: stats.beta,
+          year1return: stats.year1ChangePercent,
+          stddev,
+          isLoading: false,
+          currentPortfolio: JSON.parse(localStorage.getItem('portfolio'))
+        });
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({ errorHandler: err, isLoading: false });
       });
-    });
   }
+
+  getRiskScore = () => {
+    if (!this.state.sentiment.sentiment) {
+      const betaPrep = this.state.beta - 1;
+      const betaRisk = betaPrep * 33;
+      const ER = this.state.earningsRisk * 33;
+      const devRisk = this.state.stddev * 34;
+      const rrRiskScore = betaRisk + ER + devRisk;
+      return Math.round(rrRiskScore);
+    }
+    const betaPrep = this.state.beta - 1;
+    const betaRisk = betaPrep * 25;
+    const ER = this.state.earningsRisk * 25;
+    const devRisk = this.state.stddev * 25;
+    const sentiRisk = this.state.sentiment.sentiment.bearishPercent * 25;
+    const rrRiskScore = betaRisk + ER + devRisk + sentiRisk;
+    return Math.round(rrRiskScore);
+  };
 
   handleAddToPortfolio = event => {
     event.preventDefault();
@@ -59,12 +83,7 @@ class StockInfoRisk extends PureComponent {
       sentiment
     } = this.state;
 
-    const betaPrep = beta - 1;
-    const betaRisk = betaPrep * 25;
-    const ER = earningsRisk * 25;
-    const devRisk = stddev * 25;
-    const sentiRisk = sentiment.sentiment.bearishPercent * 25;
-    const rrRiskScore = Math.round(betaRisk + ER + devRisk + sentiRisk);
+    const rrRiskScore = this.getRiskScore();
 
     let newPortfolio;
     if (currentPortfolio === null) {
@@ -94,26 +113,24 @@ class StockInfoRisk extends PureComponent {
     if (this.state.isLoading) {
       return <p>Loading...</p>;
     }
-    const betaPrep = this.state.beta - 1;
-    const betaRisk = betaPrep * 25;
-    const ER = this.state.earningsRisk * 25;
-    const devRisk = this.state.stddev * 25;
-    const sentiRisk = this.state.sentiment.sentiment.bearishPercent * 25;
-    const rrRiskScore = betaRisk + ER + devRisk + sentiRisk;
+    if (this.state.errorHandler) {
+      return <p>Sorry, this security is not yet supported.</p>;
+    }
+
     return (
       <div>
         <img src={this.state.logo} alt="" />
-        {this.state.sentiment.buzz.buzz > 0.5 && <p>HOT IN THE MARKET</p>}
-        <p>{this.state.profile.companyName}</p>
-        <p>{this.state.profile.description}</p>
-        <p>{this.state.profile.exchange}</p>
-        <p>{this.state.profile.industry}</p>
-        <p>{this.state.profile.sector}</p>
+        {this.state.sentiment.buzz.buzz > 0.5 && <p>{`<<<TRENDING>>>`}</p>}
+        <p>Name: {this.state.profile.companyName}</p>
+        <p>Description: {this.state.profile.description}</p>
+        <p>Exchange: {this.state.profile.exchange}</p>
+        <p>Industry: {this.state.profile.industry}</p>
+        <p>Sector: {this.state.profile.sector}</p>
         <p>
           r//r Risk Score (based on 100 points, higher being more risky):{' '}
-          {Math.round(rrRiskScore)}
+          {this.getRiskScore()}
         </p>
-        <p>1 Year Return: {this.state.year1return * 100}%</p>
+        <p>1 Year Return: {Math.round(this.state.year1return * 100)}%</p>
 
         <form onSubmit={this.handleAddToPortfolio}>
           <button type="submit">Add To Portfolio</button>
