@@ -1,13 +1,114 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: whitesmoke;
+  background-color: #282c34;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+nav {
+  padding: 2%;
+  margin: 1%;
+}
+
+nav a {
+  padding: 10%;
+}
+
+#searchContainer {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto auto auto auto;
+}
+
+#switchContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+}
+
+#boxForSearch {
+  padding: 2%;
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+}
+
+#searchBox {
+  background-color: #282c34;
+  color: white;
+  border-color: 2px white;
+  height: 5vh;
+  font-size: 100%;
+  text-align: center;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+}
+
+#submitButton {
+  color: #282c34;
+  font-size: 120%;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+}
+
+#submitButton2 {
+  background-color: #282c3400;
+  color: white;
+  font-size: 120%;
+  border-radius: 15px;
+  border: 1px white solid;
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+}
+
+#clickOnSec {
+  grid-column: 2 / span 1;
+  grid-row: 1 / span 4;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+}
+
+#resultCardContainer {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: auto auto auto auto;
+  border: 1px white solid;
+  padding: 2%;
+  margin: 2%;
+  border-radius: 15px;
+}
+
+#ticker {
+  grid-column: 1 / span 1;
+  grid-row: 1 / span 1;
+  font-size: 110%;
+}
+
+#secName {
+  grid-column: 1 / span 1;
+  grid-row: 2 / span 1;
+}
+
+#assetCur {
+  grid-column: 1 / span 1;
+  grid-row: 3 / span 1;
+}
+
+#orex {
+  grid-column: 1 / span 1;
+  grid-row: 4 / span 1;
 }
