@@ -5,7 +5,7 @@ import earningsRiskScore from '../Utils/earningsRiskScore';
 export const getSentiment = symbol => {
   return axios
     .get(
-      `https://finnhub.io/api/v1/news-sentiment?symbol=${symbol}&token=${finnhubKey}`
+      `http://proxy-server.herokuapp.com/https://finnhub.io/api/v1/news-sentiment?symbol=${symbol}&token=${finnhubKey}`
     )
     .then(({ data }) => {
       if (JSON.stringify(data) === JSON.stringify({}) || !data) {
@@ -33,7 +33,7 @@ export const getSentiment = symbol => {
 export const getEarningsScore = symbol => {
   return axios
     .get(
-      `https://finnhub.io/api/v1/stock/earnings?symbol=${symbol}&token=${finnhubKey}`
+      `http://proxy-server.herokuapp.com/https://finnhub.io/api/v1/stock/earnings?symbol=${symbol}&token=${finnhubKey}`
     )
     .then(({ data }) => {
       const score = earningsRiskScore(data);
@@ -41,3 +41,32 @@ export const getEarningsScore = symbol => {
     })
     .catch(console.log);
 };
+
+// export const getSentiment = symbol => {
+//   return superagent
+//     .get(
+//       `https://finnhub.io/api/v1/news-sentiment?symbol=${symbol}&token=${finnhubKey}`
+//     )
+//     .then(({ data }) => {
+//       console.log(data);
+//       if (JSON.stringify(data) === JSON.stringify({}) || !data) {
+//         // returns a default sentiment score
+//         return {
+//           buzz: {
+//             articlesInLastWeek: 49,
+//             buzz: 0.49,
+//             weeklyAverage: 100
+//           },
+//           companyNewsScore: 0.5,
+//           sectorAverageBullishPercent: 0.5,
+//           sectorAverageNewsScore: 0.5,
+//           sentiment: {
+//             bearishPercent: 0.5,
+//             bullishPercent: 0.5
+//           },
+//           symbol: 'DUMMY'
+//         };
+//       }
+//       return data;
+//     });
+// };
