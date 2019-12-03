@@ -88,13 +88,7 @@ class Portfolio extends PureComponent {
                 />
               );
             })}
-            <div>
-              {/* <input
-                type="number"
-                onChange={this.changeVal}
-                value={this.state.portfolioNotional}
-                placeholder="Enter Value Here, Default 1000000"
-              /> */}
+            <div id="porfolioMetricsContainer">
               <h3>Portfolio Metrics</h3>
               <h4>Average Risk Score: {this.getAverageRisk()}</h4>
               <h4>
@@ -104,8 +98,10 @@ class Portfolio extends PureComponent {
             </div>
           </div>
         )}
-        <form onSubmit={this.clearPortfolio}>
-          <button type="submit">Clear</button>
+        <form onSubmit={this.clearPortfolio} id="portfolioActions">
+          <button type="submit" id="submitButton3">
+            Clear
+          </button>
         </form>
         <Link to="/">Back To Search</Link>
       </div>

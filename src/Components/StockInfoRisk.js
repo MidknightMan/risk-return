@@ -30,6 +30,9 @@ class StockInfoRisk extends PureComponent {
       av.getDeviation(this.props.symbol)
     ])
       .then(([url, profileObj, sentimentObj, score, stats, stddev]) => {
+        if (!stats || !stddev || !score || !sentimentObj) {
+          this.setState({ errorHandler: 'data missing', isLoading: true });
+        }
         this.setState({
           symbol: this.props.symbol,
           logo: url,
@@ -118,22 +121,30 @@ class StockInfoRisk extends PureComponent {
     }
 
     return (
-      <div>
-        <img src={this.state.logo} alt="" />
-        {this.state.sentiment.buzz.buzz > 0.5 && <p>{`<<<TRENDING>>>`}</p>}
-        <p>Name: {this.state.profile.companyName}</p>
-        <p>Description: {this.state.profile.description}</p>
-        <p>Exchange: {this.state.profile.exchange}</p>
-        <p>Industry: {this.state.profile.industry}</p>
-        <p>Sector: {this.state.profile.sector}</p>
-        <p>
+      <div id="stockInfoContainer">
+        <div id="stockLogo">
+          <img src={this.state.logo} alt="" />
+        </div>
+        {this.state.sentiment.buzz.buzz > 0.5 && (
+          <p id="stockTrending">{`<<<TRENDING>>>`}</p>
+        )}
+        <p id="stockName">Name: {this.state.profile.companyName}</p>
+        <p id="stockDesc">Description: {this.state.profile.description}</p>
+        <p id="stockExch">Exchange: {this.state.profile.exchange}</p>
+        <p id="stockInd">Industry: {this.state.profile.industry}</p>
+        <p id="stockSector">Sector: {this.state.profile.sector}</p>
+        <p id="riskScore">
           r//r Risk Score (based on 100 points, higher being more risky):{' '}
           {this.getRiskScore()}
         </p>
-        <p>1 Year Return: {Math.round(this.state.year1return * 100)}%</p>
+        <p id="stockReturn">
+          1 Year Return: {Math.round(this.state.year1return * 100)}%
+        </p>
 
-        <form onSubmit={this.handleAddToPortfolio}>
-          <button type="submit">Add To Portfolio</button>
+        <form onSubmit={this.handleAddToPortfolio} id="addToPortfolio">
+          <button type="submit" id="submitButton3">
+            Add To Portfolio
+          </button>
         </form>
       </div>
     );

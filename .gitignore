@@ -21,8 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-# finnhubKey.js
-# keys.js
-# keys2.js
-# keys3.js
-# keys4.js
+finnhubKey.js
+keys.js
+keys2.js
+keys3.js
+keys4.js
