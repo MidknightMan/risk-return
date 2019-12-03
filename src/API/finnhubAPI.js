@@ -5,7 +5,7 @@ import earningsRiskScore from '../Utils/earningsRiskScore';
 export const getSentiment = symbol => {
   return axios
     .get(
-      `http://proxy-server.herokuapp.com/https://finnhub.io/api/v1/news-sentiment?symbol=${symbol}&token=${finnhubKey}`
+      `https://proxy-server.herokuapp.com/https://finnhub.io/api/v1/news-sentiment?symbol=${symbol}&token=${finnhubKey}`
     )
     .then(({ data }) => {
       if (JSON.stringify(data) === JSON.stringify({}) || !data) {
@@ -33,7 +33,7 @@ export const getSentiment = symbol => {
 export const getEarningsScore = symbol => {
   return axios
     .get(
-      `http://proxy-server.herokuapp.com/https://finnhub.io/api/v1/stock/earnings?symbol=${symbol}&token=${finnhubKey}`
+      `https://proxy-server.herokuapp.com/https://finnhub.io/api/v1/stock/earnings?symbol=${symbol}&token=${finnhubKey}`
     )
     .then(({ data }) => {
       const score = earningsRiskScore(data);
