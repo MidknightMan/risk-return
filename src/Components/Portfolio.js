@@ -51,7 +51,13 @@ class Portfolio extends PureComponent {
     let averageReturn =
       this.state.portfolioNotional +
       arrAvg(returnPercentArr) * this.state.portfolioNotional;
-    return Math.round(averageReturn);
+
+    function formatNumber(num) {
+      return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,');
+    }
+
+    const portfolioReturn = formatNumber(Math.round(averageReturn));
+    return portfolioReturn;
   };
 
   changeVal = event => {
@@ -92,8 +98,8 @@ class Portfolio extends PureComponent {
               <h3>Portfolio Metrics</h3>
               <h4>Average Risk Score: {this.getAverageRisk()}</h4>
               <h4>
-                Backtested Return From Holding Portfolio Based on a 1 million
-                Initial Investment: {this.getAverageReturn()}
+                Backtested Return From Holding Portfolio Based on a £1,000,000
+                Initial Investment: £{this.getAverageReturn()}
               </h4>
             </div>
           </div>
