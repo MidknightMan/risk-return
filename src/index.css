@@ -58,10 +58,17 @@ nav a {
 }
 
 #submitButton {
-  color: #282c34;
+  background-color: #282c3400;
   font-size: 120%;
   border-top-right-radius: 15px;
   border-bottom-right-radius: 15px;
+  border: 1px white solid;
+  color: white;
+}
+
+#submitButton:hover {
+  background-color: white;
+  color: #282c34;
 }
 
 #submitButton2 {
